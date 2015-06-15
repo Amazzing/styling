@@ -1,5 +1,5 @@
 /* select */
-.styled-select  {	
+.styled-select  {
 	cursor: pointer;
 }
 .styled-select select {
@@ -10,7 +10,7 @@
 	position: relative;
 }
 .styled-select .option {
-	box-sizing: border-box;	
+	box-sizing: border-box;
 	float: none!important;
 	padding: 5px 10px;
 	background: #FFF;
@@ -32,21 +32,21 @@
 .styled-select dl i.toggle {
 	content: '';
 	position: absolute;
-	right: 0; top: 0; bottom: 0;  
-	width: 10px;  
-	margin: 4px;	
+	right: 0; top: 0; bottom: 0;
+	width: 10px;
+	margin: 4px;
 }
 .styled-select dl i.toggle:before {
 	content: '';
 	position: absolute;
 	border: 5px solid transparent;
 	border-top-color: #999;
-	width: 0;	
+	width: 0;
 	top: 50%;
-	left: 50%;	
-	margin: -2px auto auto -5px;	
+	left: 50%;
+	margin: -2px auto auto -5px;
 }
-.styled-select  ul {		
+.styled-select  ul {
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -55,7 +55,7 @@
 	border: 1px solid #DDD;
 	background: #FFF;
 	margin: -1px 0 0 0;
-	overflow-y: auto;	
+	overflow-y: auto;
 }
 .styled-select.mobile  ul {
 	position: fixed;
@@ -73,12 +73,12 @@
 	background: #EEE;
 }
 .styled-select dl.closed ul {
-	display:none;	
+	display:none;
 }
 
 /* checkbox/radio */
 .styled-checkbox, .styled-radio {
-	display: inline-block;	
+	display: inline-block;
 	border: 1px solid #DDD;
 	padding: 0;
 	width: 12px;
@@ -118,11 +118,11 @@
 	border-style: solid;
 	border-color: transparent transparent #71B238 #71B238;
 	border-width: 0 0 3px 3px;
-	transform: rotate(-45deg);	
+	transform: rotate(-45deg);
 }
 
 /* file */
-.styled-file {	
+.styled-file {
 	display: inline-block;
 	border: 1px solid #DDD;
 	position: relative;
@@ -130,7 +130,7 @@
 	cursor: pointer;
 	white-space: nowrap;
 	overflow: hidden;
-	text-overflow: ellipsis;  
+	text-overflow: ellipsis;
 }
 .styled-file .file-button {
 	padding: 3px 5px;
@@ -152,5 +152,5 @@
 	width: 100%;
 	height: 100%;
 	top: 0;
-	opacity: 0;	
+	opacity: 0;
 }
