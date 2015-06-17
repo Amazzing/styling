@@ -1,3 +1,5 @@
+if (typeof isMobile == 'undefined')
+	var isMobile = $(window).width() < 768;
 (function($) {
 	'use strict';
 	$.stylingSettings = {
@@ -10,7 +12,7 @@
 	if (typeof product_fileDefaultHtml != 'undefined')
 		$.stylingSettings.noFiletxt = product_fileDefaultHtml;
 
-	// defined in constact-form.js
+	// defined in contact-form.js
 	if (typeof contact_fileButtonHtml != 'undefined')
 		$.stylingSettings.chooseFileTxt = contact_fileButtonHtml;
 	if (typeof contact_fileDefaultHtml != 'undefined')
@@ -26,7 +28,7 @@
 				var options = $(this).find('option, optgroup');
 				if (!options.length)
 					return;
-				var newHTML = '<dl class="closed"><dt class="option"><span class="selected_name">'+$(this).find('option:selected').text()+'</span><i class="toggle"></i></dt><dd><ul>';
+				var newHTML = '<dl class="closed"><dt class="option '+$.trim($(this).attr('class') || '')+'"><span class="selected_name">'+$(this).find('option:selected').text()+'</span><i class="toggle"></i></dt><dd><ul>';
 				options.each(function(i){
 					var val = $($(this)).val();
 					var optClass = 'option '+$.trim($(this).attr('class') || '');
@@ -74,10 +76,7 @@
 				}
 			}
 			if ($(this).is(':disabled'))
-				$(this).parent().addClass('disabled');
-
-			if (typeof isMobile == 'undefined')
-				isMobile = $(window).width() < 768;
+				$(this).parent().addClass('disabled');			
 			if (isMobile)
 				$(this).parent().addClass('mobile');
 		});
