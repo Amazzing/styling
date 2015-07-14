@@ -1,3 +1,4 @@
+var is_android = (navigator.userAgent.indexOf('Android ') > -1);
 if (typeof isMobile == 'undefined')
 	var isMobile = $(window).width() < 768;
 (function($) {
@@ -19,6 +20,8 @@ if (typeof isMobile == 'undefined')
 		$.stylingSettings.noFiletxt = contact_fileDefaultHtml;
 
 	$.fn.addStyling = function(settings) {
+		if (is_android)
+			return;
 		settings = $.extend({}, $.stylingSettings, settings);
 		this.each(function(){
 			if (this.tagName == 'SELECT'){
@@ -145,5 +148,7 @@ if (typeof isMobile == 'undefined')
 }(jQuery));
 
 $(window).load(function(){
+	if (is_android)
+		return;
 	$('select, input').addStyling();
 });
