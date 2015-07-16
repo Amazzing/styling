@@ -20,11 +20,11 @@ if (typeof isMobile == 'undefined')
 		$.stylingSettings.noFiletxt = contact_fileDefaultHtml;
 
 	$.fn.addStyling = function(settings) {
-		if (is_android)
-			return;
 		settings = $.extend({}, $.stylingSettings, settings);
 		this.each(function(){
 			if (this.tagName == 'SELECT'){
+				if (is_android)
+					return;
 				if (!$(this).parent().hasClass('styled-select'))
 					$(this).wrap('<div class="styled-select"></div>');
 				$(this).parent().find('dl').remove();
@@ -148,7 +148,5 @@ if (typeof isMobile == 'undefined')
 }(jQuery));
 
 $(window).load(function(){
-	if (is_android)
-		return;
 	$('select, input').addStyling();
 });
