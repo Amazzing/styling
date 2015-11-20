@@ -1,4 +1,4 @@
-var is_android = (navigator.userAgent.indexOf('Android ') > -1);
+// var is_android = (navigator.userAgent.indexOf('Android ') > -1);
 if (typeof isMobile == 'undefined')
 	var isMobile = $(window).width() < 768;
 (function($) {
@@ -23,10 +23,8 @@ if (typeof isMobile == 'undefined')
 		settings = $.extend({}, $.stylingSettings, settings);
 		this.each(function(){
 			if (this.tagName == 'SELECT'){
-				if (is_android)
-					return;
 				if (!$(this).parent().hasClass('styled-select'))
-					$(this).wrap('<div class="styled-select"></div>');
+					$(this).addClass('wrapped').wrap('<div class="styled-select"></div>');
 				$(this).parent().find('dl').remove();
 				var options = $(this).find('option, optgroup');
 				if (!options.length)
@@ -112,9 +110,17 @@ if (typeof isMobile == 'undefined')
 			else
 				$ul.removeClass('above');
 		}
-	}).on('click', '.styled-select li.option', function(){
-		$(this).closest('dl').addClass('closed').find('.selected_name').html($(this).html())
-		.closest('.styled-select').find('select').val($(this).attr('data-val')).change().click();
+	}).on('click', '.styled-select li.option', function(){		
+		$(this).closest('dl').addClass('closed').find('.selected_name').html($(this).html());
+		if (!$(this).hasClass('dont-bubble')) {
+			$(this).closest('.styled-select').find('select').val($(this).attr('data-val')).change().click();					
+		} else {
+			$(this).removeClass('dont-bubble');
+			
+		}
+	}).on('change', 'select.wrapped', function(){		
+		var val = $(this).val();
+		$(this).parent().find('li[data-val="'+val+'"]').addClass('dont-bubble').click();
 	});
 
 	// checkbox/radio events
