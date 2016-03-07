@@ -29,9 +29,11 @@ if (typeof isMobile == 'undefined')
 				var options = $(this).find('option, optgroup');
 				if (!options.length)
 					return;
-				var newHTML = '<dl class="closed"><dt class="option '+$.trim($(this).attr('class') || '')+'"><span class="selected_name">'+$(this).find('option:selected').text()+'</span><i class="toggle"></i></dt><dd><ul>';
+				var optionsHTML = '',
+					longestTxt = '',
+					maxChars = 0;
 				options.each(function(i){
-					var val = $($(this)).val();
+					var val = $(this).val();
 					var optClass = 'option '+$.trim($(this).attr('class') || '');
 					if (!i)
 						optClass += ' first';
@@ -45,8 +47,15 @@ if (typeof isMobile == 'undefined')
 					var dataHTML = '';
 					for (var i in data)
 						dataHTML += ' data-'+i+'="'+data[i]+'"';
-					newHTML += '<li data-val="'+val+'" class="'+optClass+'"'+dataHTML+'>'+optContent+'</li>';
+					optionsHTML += '<li data-val="'+val+'" class="'+optClass+'"'+dataHTML+'>'+optContent+'</li>';
+					var txt = $(this).text();
+					if (txt.length > maxChars) {
+						maxChars = txt.length;
+						longestTxt = $(this).text();
+					}
 				});
+				var newHTML = '<dl class="closed"><dt class="option"><span class="longest-txt">'+longestTxt+'</span><span class="selected_name">'+$(this).find('option:selected').text()+'</span><i class="toggle"></i></dt><dd><ul>';
+				newHTML += optionsHTML;
 				newHTML += '</ul></dd></dl>';
 				$(this).parent().append(newHTML);
 				// fieldset fix
@@ -77,7 +86,7 @@ if (typeof isMobile == 'undefined')
 				}
 			}
 			if ($(this).is(':disabled'))
-				$(this).parent().addClass('disabled');			
+				$(this).parent().addClass('disabled');
 			if (isMobile)
 				$(this).parent().addClass('mobile');
 		});
@@ -102,23 +111,26 @@ if (typeof isMobile == 'undefined')
 				});
 				$ul.css('max-height', maxHeight+'px').addClass('prepared');
 			}
-			var viewPortPosition = this.getBoundingClientRect();
-			var toTop = viewPortPosition.top;
-			var toBottom = $(window).height() - viewPortPosition.bottom;
-			if (toTop > toBottom && toBottom < $ul.outerHeight())
-				$ul.addClass('above');
-			else
-				$ul.removeClass('above');
+			try {
+				var viewPortPosition = this.getBoundingClientRect();
+				var toTop = viewPortPosition.top;
+				var toBottom = $(window).height() - viewPortPosition.bottom;
+				if (toTop > toBottom && toBottom < $ul.outerHeight())
+					$ul.addClass('above');
+				else
+					$ul.removeClass('above');
+			}catch(err){};
+
 		}
-	}).on('click', '.styled-select li.option', function(){		
+	}).on('click', '.styled-select li.option', function(){
 		$(this).closest('dl').addClass('closed').find('.selected_name').html($(this).html());
 		if (!$(this).hasClass('dont-bubble')) {
-			$(this).closest('.styled-select').find('select').val($(this).attr('data-val')).change().click();					
+			$(this).closest('.styled-select').find('select').val($(this).attr('data-val')).change().click();
 		} else {
 			$(this).removeClass('dont-bubble');
-			
+
 		}
-	}).on('change', 'select.wrapped', function(){		
+	}).on('change', 'select.wrapped', function(){
 		var val = $(this).val();
 		$(this).parent().find('li[data-val="'+val+'"]').addClass('dont-bubble').click();
 	});
@@ -150,7 +162,7 @@ if (typeof isMobile == 'undefined')
 	$.fn.uniform = function (settings) {
 		this.addStyling(settings);
 	}
-	$.uniform = {defaults:{}};
+	$.uniform = {defaults:{},update:function(){}};
 }(jQuery));
 
 $(window).load(function(){

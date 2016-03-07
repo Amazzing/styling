@@ -47,7 +47,7 @@
 	left: 50%;
 	margin: -2px auto auto -5px;
 }
-.styled-select  ul {
+.styled-select ul {
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -58,12 +58,12 @@
 	margin: -1px 0 0 0;
 	overflow-y: auto;
 }
-.styled-select.mobile  ul {
+.styled-select.mobile ul {
 	position: fixed;
 	top: 0; left: 0; right: 0; bottom: 0;
 	margin: auto 1em;
 }
-.styled-select  ul.above {
+.styled-select ul.above {
 	top: auto;
 	bottom: 100%;
 }
@@ -76,7 +76,14 @@
 .styled-select dl.closed ul {
 	display:none;
 }
-
+.selected_name {
+	position: absolute;
+	left: 10px;
+}
+.longest-txt {
+	visibility: hidden;
+	margin-right: 10px;
+}
 /* checkbox/radio */
 .styled-checkbox, .styled-radio {
 	display: inline-block;
