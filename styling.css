@@ -8,6 +8,7 @@
 }
 .styled-select dl {
 	position: relative;
+	margin: 0;
 }
 .styled-select .option {
 	box-sizing: border-box;
