@@ -73,10 +73,11 @@ if (typeof isMobile == 'undefined')
 				}
 			}
 			else if (this.tagName == 'INPUT'){
-				var type = $(this).attr('type');
+				var type = $(this).attr('type'),
+					cls = $(this).attr('class') || '';
 				if ( type == 'checkbox' || type == 'radio' || type == 'file'){
 					if (!$(this).parent().hasClass('styled-'+type)){
-						$(this).wrap('<span class="styled-'+type+'"></span>');
+						$(this).wrap('<span class="styled-'+type+' '+cls+'"></span>');
 						if (type == 'file'){
 							$(this).before('<span class="file-button">'+settings.chooseFileTxt+'</span><span class="file-name">'+settings.noFiletxt+'</span>');
 						}
