@@ -90,7 +90,9 @@
 	border: 1px solid #DDD;
 	padding: 0;
 	width: 12px;
+	min-width: 12px;
 	height: 12px;
+	min-height: 12px;
 	border-radius: 3px;
 	position: relative;
 	cursor: pointer;
