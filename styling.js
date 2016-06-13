@@ -141,12 +141,9 @@ if (typeof isMobile == 'undefined')
 	$(document).on('change click', '.styled-checkbox input, .styled-radio input', function(){
 		if ($(this).attr('type') == 'radio')
 			$('[type="radio"][name="'+$(this).attr('name')+'"]').each(function(){
-				$(this).parent().removeClass('checked');
+				$(this).parent().toggleClass('checked', $(this).prop('checked'));
 			});
-		if ($(this).prop('checked'))
-			$(this).parent().addClass('checked');
-		else
-			$(this).parent().removeClass('checked');
+		$(this).parent().toggleClass('checked', $(this).prop('checked'));
 	});
 
 	// file events
