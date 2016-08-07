@@ -22,7 +22,7 @@ if (typeof isMobile == 'undefined')
 	$.fn.addStyling = function(settings) {
 		settings = $.extend({}, $.stylingSettings, settings);
 		this.each(function(){
-			if (this.tagName == 'SELECT'){
+			if (this.tagName == 'SELECT' && !isMobile){
 				if (!$(this).parent().hasClass('styled-select'))
 					$(this).addClass('wrapped').wrap('<div class="styled-select"></div>');
 				$(this).parent().find('dl').remove();
