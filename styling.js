@@ -1,6 +1,4 @@
-// var is_android = (navigator.userAgent.indexOf('Android ') > -1);
-if (typeof isMobile == 'undefined')
-	var isMobile = $(window).width() < 768;
+var isMobileOrTablet = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 (function($) {
 	'use strict';
 	$.stylingSettings = {
@@ -22,7 +20,7 @@ if (typeof isMobile == 'undefined')
 	$.fn.addStyling = function(settings) {
 		settings = $.extend({}, $.stylingSettings, settings);
 		this.each(function(){
-			if (this.tagName == 'SELECT' && !isMobile){
+			if (this.tagName == 'SELECT' && !isMobileOrTablet){
 				if (!$(this).parent().hasClass('styled-select'))
 					$(this).addClass('wrapped').wrap('<div class="styled-select"></div>');
 				$(this).parent().find('dl').remove();
@@ -54,7 +52,7 @@ if (typeof isMobile == 'undefined')
 						longestTxt = $(this).text();
 					}
 				});
-				var newHTML = '<dl class="closed"><dt class="option"><span class="longest-txt">'+longestTxt+'</span><span class="selected_name">'+$(this).find('option:selected').text()+'</span><i class="toggle"></i></dt><dd><ul>';
+				var newHTML = '<dl class="closed"><dt class="option"><span class="longest-txt">'+longestTxt+'</span><span class="selected_name">'+$(this).find('option:selected').text()+'</span><i class="toggle"></i></dt><dd><ul class="styled-options">';
 				newHTML += optionsHTML;
 				newHTML += '</ul></dd></dl>';
 				$(this).parent().append(newHTML);
@@ -88,7 +86,7 @@ if (typeof isMobile == 'undefined')
 			}
 			if ($(this).is(':disabled'))
 				$(this).parent().addClass('disabled');
-			if (isMobile)
+			if (isMobileOrTablet)
 				$(this).parent().addClass('mobile');
 		});
 	}
@@ -134,6 +132,19 @@ if (typeof isMobile == 'undefined')
 	}).on('change', 'select.wrapped', function(){
 		var val = $(this).val();
 		$(this).parent().find('li[data-val="'+val+'"]').addClass('dont-bubble').click();
+	}).on('mousewheel.styling DOMMouseScroll.styling', '.styled-options', function(e){
+		/*
+		* copied from jquery.chosen
+		*/
+		var delta, _ref1, _ref2;
+		delta = -((_ref1 = e.originalEvent) != null ? _ref1.wheelDelta : void 0) || ((_ref2 = e.originialEvent) != null ? _ref2.detail : void 0);
+		if (delta != null) {
+			e.preventDefault();
+			if (e.type === 'DOMMouseScroll') {
+				delta = delta * 40;
+			}
+			$(this).scrollTop(delta + $(this).scrollTop());
+		}
 	});
 
 	// checkbox/radio events
