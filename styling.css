@@ -18,6 +18,9 @@
 	word-wrap: break-word;
 	width: 100%;
 }
+.styled-select .option.disabled {
+	color: #DDD;
+}
 .styled-select dt {
 	border: 1px solid #DDD;
 	overflow: hidden;

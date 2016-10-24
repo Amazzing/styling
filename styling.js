@@ -31,11 +31,9 @@ var isMobileOrTablet = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera
 					longestTxt = '',
 					maxChars = 0;
 				options.each(function(i){
-					var val = $(this).val();
-					var optClass = 'option '+$.trim($(this).attr('class') || '');
-					if (!i)
-						optClass += ' first';
-					var optContent = $($(this)).text();
+					var val = $(this).val(),
+						optClass = 'option '+$.trim($(this).attr('class') || '')+($(this).is(':disabled') ? ' disabled' : '')+(!i ? ' first' : ''),
+						optContent = $($(this)).text();
 					if (this.nodeName == 'OPTGROUP'){
 						val = '';
 						optContent = $($(this)).attr('label');
