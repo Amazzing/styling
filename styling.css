@@ -5,6 +5,7 @@
 .styled-select select {
 	position: absolute;
 	visibility: hidden;
+	display: none;
 }
 .styled-select dl {
 	position: relative;
