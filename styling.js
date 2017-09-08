@@ -147,7 +147,14 @@ var isMobileOrTablet = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera
 
 	// checkbox/radio events
 	// in some cases click or change can be unbound, so bind both of them here
-	$(document).on('change click', '.styled-checkbox input, .styled-radio input', function(){
+	$(document).on('change click', '.styled-checkbox input, .styled-radio input', function(e){
+		// avoid double actions. click is automatically triggered before change
+		if (e.type == 'click') {
+			$(this).data('justclicked', true);
+		} else if (e.type == 'change' && $(this).data('justclicked')) {
+			$(this).data('justclicked', '');
+			return;
+		}
 		if ($(this).attr('type') == 'radio')
 			$('[type="radio"][name="'+$(this).attr('name')+'"]').each(function(){
 				$(this).parent().toggleClass('checked', $(this).prop('checked'));
